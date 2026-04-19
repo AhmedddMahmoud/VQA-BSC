@@ -1,0 +1,143 @@
+You are working inside an existing bachelor-project VQA repository.
+
+These rules are non-negotiable.
+
+==================================================
+CORE PROJECT RULES
+==================================================
+
+1. Do NOT restart from zero.
+2. Do NOT ignore the current repo state.
+3. Do NOT propose broad rewrites.
+4. Do NOT invent missing architecture or files without first checking what already exists.
+5. Do NOT change things just because you prefer a different design.
+6. Always review existing code first, then plan, then implement.
+
+==================================================
+TRACK SEPARATION RULES
+==================================================
+
+1. Track A is the classical baseline and is LOCKED.
+2. Track A must remain the control group.
+3. Do NOT mutate Track A except for safely reusing shared utilities.
+4. Track B must be implemented as a separate pretrained VLM branch.
+5. Do NOT create a Frankenstein merge between the classical model and the pretrained VLM.
+6. Maintain clean scientific separation between:
+   - Track A = classical baseline
+   - Track B = pretrained VLM path
+
+==================================================
+TRACK A LOCKED BASELINE RULES
+==================================================
+
+Treat the following as fixed reference state:
+- frozen pretrained ResNet-50 image encoder
+- GRU question encoder
+- 2-hop spatial attention
+- hard-label training
+- top-1000 answer classification
+- no retrieval
+- no OCR
+- no external knowledge
+- no generative answering
+
+Established conclusions:
+- soft-target training lost
+- BiLSTM lost
+- top-3000 answer space lost
+- classical branch is now baseline/control group
+
+Therefore:
+- do NOT propose more random classical tweaks
+- do NOT reopen old ablations unless there is a concrete technical reason
+
+==================================================
+TRACK B RULES
+==================================================
+
+Track B is a separate pretrained VLM evaluation path.
+
+Immediate Track B goal:
+- inference-first
+- pretrained/fine-tuned VLM
+- preferred first target: PaliGemma on VQAv2
+- evaluate on existing validation subset
+- reuse scoring/evaluation infrastructure where appropriate
+
+Track B must NOT include:
+- retrieval
+- OCR
+- KB-VQA
+- external knowledge injection
+- fine-tuning as the first step
+- merging the VLM into the old GRU+attention architecture
+
+==================================================
+ENGINEERING RULES
+==================================================
+
+1. Reuse existing code where sensible.
+2. Prefer adding new files over rewriting stable classical files.
+3. Keep changes minimal, modular, and explicit.
+4. Preserve existing file conventions, config style, and output structure when possible.
+5. Do not break Track A while implementing Track B.
+6. If an existing dataset path is too tied to top-K classification or answer_idx assumptions, create a parallel Track B evaluation path instead of corrupting the old one.
+7. Keep deterministic evaluation behavior by default.
+8. Save outputs in the repo’s existing style:
+   - predictions JSONL
+   - qualitative failures JSONL
+   - metrics summary JSON
+
+==================================================
+WORKFLOW RULES
+==================================================
+
+You must follow this order:
+
+PHASE 1 — REVIEW
+- inspect the current repo
+- identify reusable files
+- identify what must stay untouched
+- identify classifier-specific assumptions that may block Track B
+
+PHASE 2 — PLAN
+- propose the minimum clean change set
+- list files to create
+- list files to modify
+- explain why each change is necessary
+
+PHASE 3 — IMPLEMENT
+- implement only the required Track B changes
+- do not drift into unrelated refactors
+
+PHASE 4 — VERIFY
+- provide exact commands for a small sanity run first
+- explain expected outputs
+- explain first failure modes to check
+
+==================================================
+REVIEW QUESTIONS THAT MUST BE ANSWERED
+==================================================
+
+Before implementation, explicitly answer:
+1. Which existing files are reusable as-is?
+2. Which files must remain untouched?
+3. Can the current dataset pipeline be reused directly for generative VLM evaluation?
+4. If not, what exact assumption blocks reuse?
+5. Which metrics utilities can be reused unchanged?
+6. What is the smallest clean implementation path for Track B?
+
+==================================================
+OUTPUT QUALITY RULES
+==================================================
+
+1. Be surgical.
+2. Be conservative.
+3. Respect the existing repo.
+4. Do not hallucinate project state.
+5. Do not suggest unrelated experiments.
+6. Do not pivot away from Track B.
+7. Do not rewrite stable code without necessity.
+
+Immediate mission:
+Build the first clean Track B pretrained VLM evaluation path while preserving the locked classical baseline.

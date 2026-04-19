@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# OS/editor noise
+.DS_Store
+.vscode/
+
+# Local data (too large for Git)
+datasets/
+data/
+
+# Generated outputs and artifacts
+outputs/
+notebooks/
+
+# Model and tensor artifacts
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.onnx
+
+# Numpy / cached arrays
+*.npy
+*.npz
+
+# Logs and temp
+*.log
+tmp/
+temp/

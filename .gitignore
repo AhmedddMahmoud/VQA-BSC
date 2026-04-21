@@ -13,13 +13,17 @@ venv/
 .DS_Store
 .vscode/
 
-# Local data (too large for Git)
-datasets/
-data/
+# Local data (too large for Git) - top-level only
+/datasets/
+/data/
 
-# Generated outputs and artifacts
-outputs/
-notebooks/
+# Generated outputs and artifacts - top-level only
+/outputs/
+/notebooks/
+
+# Keep code package tracked
+!src/datasets/
+!src/datasets/*.py
 
 # Model and tensor artifacts
 *.pt

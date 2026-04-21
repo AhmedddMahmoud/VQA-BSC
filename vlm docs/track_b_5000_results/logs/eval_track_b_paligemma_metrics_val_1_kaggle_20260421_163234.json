@@ -1,0 +1,40 @@
+{
+  "split": "val_1_kaggle",
+  "track": "track_b_vlm",
+  "model_name_or_path": "google/paligemma-3b-ft-vqav2-224",
+  "sample_count": 1,
+  "dataset_loaded_samples": 1,
+  "dataset_filtered_out_not_in_topk": 0,
+  "primary_metric": "vqa_soft_accuracy",
+  "top1_accuracy": 1.0,
+  "vqa_soft_accuracy": 1.0,
+  "answer_type_breakdown": {
+    "overall_count": 1,
+    "types": {
+      "yes/no": {
+        "count": 0,
+        "exact_match_accuracy": 0.0,
+        "vqa_soft_accuracy": 0.0
+      },
+      "number": {
+        "count": 0,
+        "exact_match_accuracy": 0.0,
+        "vqa_soft_accuracy": 0.0
+      },
+      "other": {
+        "count": 1,
+        "exact_match_accuracy": 1.0,
+        "vqa_soft_accuracy": 1.0
+      }
+    }
+  },
+  "supplementary_text_overlap_metrics": {
+    "bleu_1": 1.0,
+    "bleu_2": 3.16227766016838e-05,
+    "bleu_4": 1.7782794100389237e-07,
+    "rouge_l": 1.0,
+    "meteor": 0.5
+  },
+  "predictions_file": "outputs/predictions/eval_track_b_paligemma_predictions_val_1_kaggle_20260421_163234.jsonl",
+  "failures_file": "outputs/predictions/eval_track_b_paligemma_failures_val_1_kaggle_20260421_163234.jsonl"
+}

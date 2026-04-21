@@ -12,6 +12,7 @@ venv/
 # OS/editor noise
 .DS_Store
 .vscode/
+.idea/
 
 # Local data (too large for Git) - top-level only
 /datasets/
@@ -20,6 +21,17 @@ venv/
 # Generated outputs and artifacts - top-level only
 /outputs/
 /notebooks/
+/predictions/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Tooling and local caches
+.mypy_cache/
+.ruff_cache/
+.cache/
+.coverage
+htmlcov/
 
 # Keep code package tracked
 !src/datasets/
@@ -41,3 +53,7 @@ venv/
 *.log
 tmp/
 temp/
+
+# Local secrets and env files
+.env
+.env.*

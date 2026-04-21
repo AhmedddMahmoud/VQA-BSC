@@ -75,6 +75,22 @@ python -m src.train.eval_vqa --config configs/version1_vqa.json --checkpoint out
   - `outputs/predictions/qualitative_failures_epoch_*.jsonl`
   - `outputs/predictions/qualitative_failures_eval.jsonl`
 
+## Track B: Pretrained VLM Evaluation
+
+This repo also includes an inference-only Track B path using `google/paligemma-3b-ft-vqav2-224`.
+
+Run Track B evaluation with:
+
+```bash
+python -m src.train.eval_vlm_vqa --config configs/track_b_paligemma_vqav2_eval.json --subset-val 1800 --split-name val_1800_kaggle
+```
+
+Track B outputs are saved to:
+
+- `logs/eval_track_b_paligemma_metrics_*.json`
+- `predictions/eval_track_b_paligemma_predictions_*.jsonl`
+- `predictions/eval_track_b_paligemma_failures_*.jsonl`
+
 ## Notes for Laptop Compute
 
 - Keep `freeze_image_encoder = true` first.

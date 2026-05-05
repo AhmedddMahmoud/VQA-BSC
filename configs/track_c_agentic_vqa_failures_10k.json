@@ -1,0 +1,35 @@
+{
+  "track_b_failures_jsonl": "docs/vlm docs/track_b_10000_results/predictions/eval_track_b_paligemma_failures_val_10000_kaggle_20260421_171722.jsonl",
+  "model_name_or_path": "google/paligemma-3b-ft-vqav2-224",
+  "device": "cuda",
+  "generation_max_new_tokens": 8,
+  "generation_do_sample": false,
+  "generation_num_beams": 1,
+  "max_cases": null,
+  "route_toggles": {
+    "general": true,
+    "counting": true,
+    "localization_or_missing_object": true,
+    "ocr_or_text_sensitive": true,
+    "spatial_or_relation_sensitive": true
+  },
+  "prompt_templates": {
+    "general": "<image> answer {question}",
+    "counting": "<image> answer with a short number only. {question}",
+    "localization_or_missing_object": "<image> inspect the specific object or region carefully. answer briefly but precisely. prefer the most specific visible location/detail rather than a broad category. {question}",
+    "ocr_or_text_sensitive": "<image> if text is visible, read it carefully and answer briefly. {question}",
+    "spatial_or_relation_sensitive": "<image> focus on object positions and relations, then answer briefly. {question}"
+  },
+  "use_verifier": false,
+  "verifier_routes": [
+    "counting",
+    "spatial_or_relation_sensitive",
+    "ocr_or_text_sensitive"
+  ],
+  "verifier_prompt_template": "<image> verify this answer carefully and return only a short final answer. question: {question} previous_answer: {first_answer}",
+  "fallback_images_dir": "datasets/train2014/val2014",
+  "logs_dir": "outputs/logs",
+  "predictions_dir": "outputs/predictions",
+  "split_name": "track_c_v3_failures_from_10k",
+  "save_outputs": true
+}
